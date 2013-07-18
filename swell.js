@@ -173,13 +173,6 @@ var FullScreen = (
 
 				document.documentElement.style.height = fullheight + 'px';
 
-				/*
-				 * Like a nasty virus jQuery tries to disrupt the normal running of your perfectly
-				 * balanced system by setting bloody minHeights all over the place so we need to make sure
-				 * we are doing our best to limit it's control by overriding minHeight
-				 */
-				document.documentElement.style.minHeight = fullheight + 'px';
-
 				//scroll the URL bar above the top of the screen
 				window.scrollTo(0,1);
 
@@ -203,7 +196,11 @@ var FullScreen = (
 
 			function publishChange()
 			{
-				PubSub.publish(PubSubConstants.APP_STATE_ORIENTATION, (window.orientation + orientationOffset == 90 || window.orientation + orientationOffset == -90));
+				/*
+				here is where we can publish to the rest of our app that we are ready and pass something like this:
+				(window.orientation + orientationOffset == 90 || window.orientation + orientationOffset == -90);
+				telling our app whether we're in landscape or portrait
+				*/
 			}
 
 			/*
