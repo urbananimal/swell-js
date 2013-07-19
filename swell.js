@@ -173,13 +173,17 @@ var Swell = (
 
 				document.documentElement.style.height = fullheight + 'px';
 
-				//scroll the URL bar above the top of the screen
-				window.scrollTo(0,1);
+				/*
+				 * scroll the URL bar above the top of the screen
+				 * we need the 400 ms for Samsung phones. It might not benecessary for all phone
+				 * but the 400 ms is of minimal detriment to user experiend so just do it for all
+				*/
+				setTimeout(function(){window.scrollTo(0,1);}, 400);
 
 				//publish the fact that orientation has changed with a value of true or false specifying whether the orientation is landscape
 				publishChange();
 				/*
-				 * on Android 4 afer we've set the height we give it 200ms then clear
+				 * on Android 4 afer we've set the height we give it 500ms then clear
 				 * the style set on the document. Android 4 maintains the fullscreen height
 				 * even after we've cleared it and doesn't try and bring back the URL bar (unlike the other OSs).
 				 *
@@ -190,7 +194,7 @@ var Swell = (
 				 */
 				 if (isAndroidOs && androidVersion >= 3)
 				 {
-					setTimeout(resetDocument,200);
+					setTimeout(resetDocument,500);
 				 }
 			}
 
