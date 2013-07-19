@@ -1,4 +1,4 @@
-var FullScreen = (
+var Swell = (
 	function()
 	{
 		var done = false;
@@ -210,6 +210,65 @@ var FullScreen = (
 			 */
 			  if (!isIpad && !isChrome) setTimeout(hideUrlBar, 0);
 		}
+		
+		function isIOSDevice()
+		{
+			return navigator.userAgent.match(/iPad|iPhone|iPod/i) != null;
+		}
 
+		function isIPad()
+		{
+			return navigator.userAgent.match(/iPad/i) != null;
+		}
+
+		function isIPhone()
+		{
+			return navigator.userAgent.match(/iPhone|iPod/i) != null;
+		}
+
+		function isAndroid()
+		{
+			return navigator.userAgent.match(/Android/i) != null;
+		}
+
+		function isSonyPhone()
+		{
+			return navigator.userAgent.match(/SonyEricsson/i) != null;
+		}
+
+		function getAndroidVersion()
+		{
+			var androidRegexResult = /Android (\d+(?:\.\d+)+)/.exec(navigator.userAgent);
+		
+			if (androidRegexResult && androidRegexResult.length && androidRegexResult[0].split(' ')[1])
+			{
+				androidVersion = parseFloat(androidRegexResult[0].split(' ')[1]);
+		
+				return androidVersion;
+			}
+		}
+
+		function iOSVersion(){
+			if (isIOSDevice()){
+		
+				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+		
+			        // Usual iOS user agent format
+			        if(v && v.length > 2)
+			        {
+			            return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+			        }
+		
+			}
+		
+			return -1;
+		}
+
+		function isChromeBrowser()
+		{
+			return navigator.userAgent.match(/Chrome/i) != null;
+		}
 		return {init:init};
 	})();
+	
+	
